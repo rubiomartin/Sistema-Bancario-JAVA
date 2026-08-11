@@ -6,7 +6,7 @@ construido de punta a punta: backend en Java/Spring Boot, frontend en
 React, Postgres como base de datos, y desplegado en un VPS propio detrás
 de nginx con HTTPS real.
 
-**PROBALA ACA:** [COREBANK.COM](https://169-58-140-99.sslip.io)
+**PROBALA ACA:** [rubiomartindev.ar](https://rubiomartindev.ar)
 
 **Usuarios de prueba** (clickeables en la pantalla de login, autocompletan):
 
