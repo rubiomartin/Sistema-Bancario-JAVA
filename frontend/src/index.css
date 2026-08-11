@@ -1,0 +1,78 @@
+:root {
+  --ink-900: #0d0f15;
+  --ink-800: #171b24;
+  --ink-700: #20242f;
+  --ink-line: rgba(238, 227, 200, 0.1);
+  --ink-line-strong: rgba(238, 227, 200, 0.18);
+
+  --paper: #efe6d2;
+  --paper-dim: #cdc4ab;
+
+  --brass: #c99a4b;
+  --brass-strong: #e0b568;
+  --brass-dim: rgba(201, 154, 75, 0.14);
+
+  --mint: #6fe7c4;
+  --mint-dim: rgba(111, 231, 196, 0.14);
+
+  --rust: #e2725b;
+  --rust-dim: rgba(226, 114, 91, 0.14);
+
+  --text-hi: #f3ede0;
+  --text-lo: #9b9484;
+
+  --font-display: 'Fraunces', ui-serif, Georgia, serif;
+  --font-body: 'IBM Plex Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, 'Consolas', monospace;
+
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 18px;
+
+  --shadow-lg: 0 25px 50px -12px rgba(0, 0, 0, 0.55);
+
+  color-scheme: dark;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--ink-900);
+  color: var(--text-hi);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#root {
+  height: 100%;
+}
+
+h1, h2, h3, h4 {
+  margin: 0;
+  font-family: var(--font-body);
+  font-weight: 600;
+  color: var(--text-hi);
+}
+
+p {
+  margin: 0;
+}
+
+button, input, select {
+  font-family: inherit;
+}
+
+:focus-visible {
+  outline: 2px solid var(--brass-strong);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}

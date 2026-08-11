@@ -1,0 +1,68 @@
+services:
+  postgres-db-java:
+    image: postgres:16-alpine
+    container_name: corebank_postgres_java
+    restart: always
+    environment:
+      POSTGRES_USER: corebank
+      POSTGRES_PASSWORD: corebank
+      POSTGRES_DB: corebank
+    volumes:
+      - pgdata_java:/var/lib/postgresql/data
+      - ./db/schema.sql:/docker-entrypoint-initdb.d/01-schema.sql:ro
+
+  api-backend-java:
+    build: ./backend
+    container_name: corebank_java_api
+    restart: always
+    environment:
+      PORT: 8081
+      DATABASE_URL: postgres://corebank:corebank@postgres-db-java:5432/corebank?sslmode=disable
+      JWT_SECRET: a849897ce471b3060d90543548748a09d66589fbbb3407ac64d7396a7665fbe7
+      CORS_ALLOWED_ORIGIN: "https://${DOMAIN}"
+      WS_ALLOWED_ORIGIN: "https://${DOMAIN}"
+    depends_on:
+      - postgres-db-java
+
+  interfaz-operativa-java:
+    build: ./frontend
+    container_name: corebank_java_frontend
+    restart: always
+    depends_on:
+      - api-backend-java
+
+  nginx:
+    image: nginx:1.27-alpine
+    container_name: corebank_java_nginx
+    restart: always
+    environment:
+      DOMAIN: ${DOMAIN}
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/templates:/etc/nginx/templates:ro
+      - certbot_certs:/etc/letsencrypt:ro
+      - certbot_www:/var/www/certbot:ro
+    depends_on:
+      - api-backend-java
+      - interfaz-operativa-java
+
+  certbot:
+    image: certbot/certbot:latest
+    container_name: corebank_java_certbot
+    restart: always
+    volumes:
+      - certbot_certs:/etc/letsencrypt
+      - certbot_www:/var/www/certbot
+    entrypoint: >
+      sh -c "trap exit TERM;
+      while :; do
+        certbot renew --webroot -w /var/www/certbot --quiet;
+        sleep 12h & wait $$!;
+      done"
+
+volumes:
+  pgdata_java:
+  certbot_certs:
+  certbot_www:

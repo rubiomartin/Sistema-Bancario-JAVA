@@ -1,0 +1,28 @@
+# --- Reglas Generales ---
+node_modules
+logs
+*.log
+.DS_Store
+
+# --- Reglas del Frontend (React/Vite) ---
+dist
+dist-ssr
+*.local
+
+# --- Reglas del Backend (Java/Maven) ---
+backend/target/
+*.class
+
+# --- Seguridad: por si algún día se usa un .env local (no en Docker) ---
+*.env
+backend/.env
+
+# Excepción: el .env de esta carpeta no tiene secretos, sólo DOMAIN=...
+# (docker-compose lo necesita para armar CORS/nginx/certbot sin repetir
+# el dominio a mano en cada lugar) — se commitea a propósito.
+!/.env
+
+# --- Configuración de Editores ---
+.vscode/*
+!.vscode/extensions.json
+.idea
