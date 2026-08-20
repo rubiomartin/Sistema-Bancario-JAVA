@@ -41,12 +41,9 @@ de nginx con HTTPS real.
 - Sin librería de estado externa — el estado vive en el propio componente
 
 **Infraestructura**
-- Docker Compose (4 servicios de la app + nginx + certbot)
+- Docker Compose (3 servicios de la app + nginx + certbot)
 - nginx como reverse proxy y servidor de estáticos
 - Let's Encrypt / Certbot para HTTPS, con renovación automática
-
-Ver [DEPLOYMENT.md](DEPLOYMENT.md) para el detalle completo del
-despliegue (arquitectura del reverse proxy, HTTPS, runbook paso a paso).
 
 ## Arquitectura de la aplicación
 
